@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Post; // Brings in the Post model
 use DB; // --> allows use of SQL queries
 
@@ -123,9 +124,26 @@ class PostsController extends Controller
         	'body' => 'required'
         ]);
 
+            // Handles the file upload
+        if($request->hasFile('cover_image')){
+            // Get Filename w/ extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just extension
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store --> makes filenames unique so NO duplicates
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        } 
+
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        if($request->hasFile('cover_image')){
+            $post->cover_image = $fileNameToStore;
+        }
         $post->save();
 
         return redirect('/posts')->with('success', 'Post Edited');
@@ -142,8 +160,15 @@ class PostsController extends Controller
         $post = Post::find($id);
          // auth to prevent users editing other's posts...
         if(auth()->user()->id !== $post->user_id){
-            return redirect('/posts')->with('error', 'Not Your Post!');
+            return redirect('/posts')->with('error', 'Unauthorized Page');
         }
+
+        if($post->cover_image != 'noimage.jpg'){
+            //delete the image
+            Storage::delete('public/cover_images/'.$post->cover_image);
+
+        }
+
         $post->delete();
         return redirect('/posts')->with('success', 'Post Removed');
     }

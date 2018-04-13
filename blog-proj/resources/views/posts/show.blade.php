@@ -3,7 +3,8 @@
 @section('content')
 	<div class="container">
 		<h1>{{$post->title}}</h1>
-		
+		<img style="width:100%;" src="/storage/cover_images/{{$post->cover_image}}">
+		<br><br>
 			{{-- allows html to be parsed from ck-editor --}}
 		<div class="row">
 			{!!$post->body!!}
