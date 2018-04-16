@@ -2,6 +2,12 @@
 <br><br><br>
 @section('content')
 	<div class="container">
+		<div class="container">
+			<div class="row">
+				<a href="/posts" class="btn btn-md btn-success">Go Back</a>
+			</div>
+		</div>
+		
 		<h1>{{$post->title}}</h1>
 		<img style="width:100%;" src="/storage/cover_images/{{$post->cover_image}}">
 		<br><br>
@@ -9,7 +15,7 @@
 		<div class="row">
 			{!!$post->body!!}
 		</div>
-		<a href="/posts" class="btn btn-md btn-success">Go Back</a>
+		
 		<hr>
 		<small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
 		<small>{{$post->cover_image}}</small>

@@ -1,5 +1,6 @@
-@if(count($errors) >0)
-	@foreach($errors->all() as $error)
+{{-- this blade handles alert messages... --}}
+@if(count($errors) > 0)
+	@foreach($errors -> all() as $error)
 		<div class="alert alert-danger">
 			{{$error}}
 		</div>
@@ -8,7 +9,7 @@
 
 @if(session('success'))
 	<div class="alert alert-success">
-		{{session('session')}}
+		{{session('success')}}
 	</div>
 @endif
 

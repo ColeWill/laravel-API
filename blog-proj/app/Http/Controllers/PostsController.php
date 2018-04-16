@@ -64,7 +64,7 @@ class PostsController extends Controller
             // Upload Image
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
         } else{
-            $fileNameToStore = 'noimage.jpg';
+            $fileNameToStore = 'none.jpg';
         }
 
         // Create a Post
@@ -163,13 +163,13 @@ class PostsController extends Controller
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
-        if($post->cover_image != 'noimage.jpg'){
+        if($post->cover_image != 'none.jpg'){
             //delete the image
             Storage::delete('public/cover_images/'.$post->cover_image);
 
         }
 
         $post->delete();
-        return redirect('/posts')->with('success', 'Post Removed');
+        return redirect('/posts')->with('error', 'Post Removed');
     }
 }

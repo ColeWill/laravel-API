@@ -23,11 +23,14 @@
 <body>
     <div id="app">
         @include('inc.navbar')
-        <div class="container">
-       {{--  <main class="py-4"> --}}
-            @include('inc.messages')
-            @yield('content')
-        </div>
+       
+            {{-- <div class="container "> --}}
+
+           {{--  <main class="py-4"> --}}
+                @include('inc.messages')
+                @yield('content')
+            {{-- </div> --}}
+        
         </main>
     </div>
 

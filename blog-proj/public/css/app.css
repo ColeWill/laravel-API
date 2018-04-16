@@ -71,6 +71,20 @@ section {
   display: block;
 }
 
+.homePage{
+  color:white;
+}
+
+.appBlade{
+  background: url('../img/garrett-patz-556937-unsplash.jpg') no-repeat center center scroll;
+    height: 1000px;
+    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
@@ -5438,7 +5452,7 @@ tbody.collapse.show {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  background-color: rgba(186,212,255,.3);
   border-radius: 0.3rem;
 }
 
